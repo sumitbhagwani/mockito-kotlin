@@ -124,3 +124,110 @@ infix fun <T> OngoingStubbing<T>.doAnswer(answer: Answer<*>): OngoingStubbing<T>
 infix fun <T> OngoingStubbing<T>.doAnswer(answer: (InvocationOnMock) -> T?): OngoingStubbing<T> {
     return thenAnswer(answer)
 }
+
+
+/**
+ * Sets a generic Answer for a unary function from a lambda.
+ * Examples:
+ * <pre>
+ *   whenever(foo.hash(any())) doAnswer String::hashCode
+ *   whenever(bar.addPunctuation(any())) doAnswer { s: String -> s + "!" }
+ * </pre>
+ */
+@JvmName("doAnswer1")
+infix fun <T, R> OngoingStubbing<R>.doAnswer(f: (T) -> R): OngoingStubbing<R> {
+  return thenAnswer({ inv -> f(inv.arguments[0] as T) })
+}
+
+/** Sets a generic Answer for a binary function from a lambda. */
+@JvmName("doAnswer2")
+infix fun <T, U, R> OngoingStubbing<R>.doAnswer(f: (T, U) -> R): OngoingStubbing<R> {
+  return thenAnswer({ inv -> f(inv.arguments[0] as T, inv.arguments[1] as U) })
+}
+
+/** Sets a generic Answer for a ternary function from a lambda. */
+@JvmName("doAnswer3")
+infix fun <T, U, V, R> OngoingStubbing<R>.doAnswer(f: (T, U, V) -> R): OngoingStubbing<R> {
+  return thenAnswer(
+    {
+      inv ->
+        f(
+          inv.arguments[0] as T,
+          inv.arguments[1] as U,
+          inv.arguments[2] as V
+        )
+      }
+  )
+}
+
+/** Sets a generic Answer for a 4-argument function from a lambda. */
+@JvmName("doAnswer4")
+infix fun <T, U, V, W, R> OngoingStubbing<R>.doAnswer(f: (T, U, V, W) -> R): OngoingStubbing<R> {
+  return thenAnswer(
+    {
+      inv ->
+        f(
+          inv.arguments[0] as T,
+          inv.arguments[1] as U,
+          inv.arguments[2] as V,
+          inv.arguments[3] as W
+        )
+      }
+  )
+}
+
+
+/** Sets a generic Answer for a 5-argument function from a lambda. */
+@JvmName("doAnswer5")
+infix fun <T, U, V, W, X, R> OngoingStubbing<R>.doAnswer(f: (T, U, V, W, X) -> R): OngoingStubbing<R> {
+  return thenAnswer(
+    {
+      inv ->
+        f(
+          inv.arguments[0] as T,
+          inv.arguments[1] as U,
+          inv.arguments[2] as V,
+          inv.arguments[3] as W,
+          inv.arguments[4] as X
+        )
+      }
+  )
+}
+
+/** Sets a generic Answer for a 6-argument function from a lambda. */
+@JvmName("doAnswer6")
+infix fun <T, U, V, W, X, Y, R> OngoingStubbing<R>.doAnswer(f: (T, U, V, W, X, Y) -> R): OngoingStubbing<R> {
+  return thenAnswer(
+    {
+      inv ->
+        f(
+          inv.arguments[0] as T,
+          inv.arguments[1] as U,
+          inv.arguments[2] as V,
+          inv.arguments[3] as W,
+          inv.arguments[4] as X,
+          inv.arguments[5] as Y
+        )
+      }
+  )
+}
+
+/** Sets a generic Answer for a 7-argument function from a lambda. */
+@JvmName("doAnswer7")
+infix fun <T, U, V, W, X, Y, Z, R> OngoingStubbing<R>.doAnswer(f: (T, U, V, W, X, Y, Z) -> R): OngoingStubbing<R> {
+  return thenAnswer(
+    {
+      inv ->
+        f(
+          inv.arguments[0] as T,
+          inv.arguments[1] as U,
+          inv.arguments[2] as V,
+          inv.arguments[3] as W,
+          inv.arguments[4] as X,
+          inv.arguments[5] as Y,
+          inv.arguments[6] as Z
+        )
+      }
+  )
+}
+
